@@ -1,0 +1,11 @@
+- hosts: app
+  become: yes
+  tasks:
+    - name: Apacheをインストール
+      yum: name=httpd state=latest
+    - name: Apacheを起動
+      service: name=httpd state=started enabled=yes
+    - name: オーナーチェンジ
+      file: dest=/var/www/html owner=vagrant recurse=yes
+    - name: htmlディレクトリのコピー
+      copy: src=./html dest=/var/www/ owner=vagrant
