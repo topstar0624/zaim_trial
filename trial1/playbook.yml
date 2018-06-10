@@ -1,11 +1,36 @@
 - hosts: app
   become: yes
   tasks:
+
     - name: Apacheをインストール
       yum: name=httpd state=latest
+
     - name: Apacheを起動
       service: name=httpd state=started enabled=yes
+
     - name: オーナーチェンジ
       file: dest=/var/www/html owner=vagrant recurse=yes
-    - name: htmlディレクトリのコピー
-      copy: src=./html dest=/var/www/ owner=vagrant
+
+    - name: PHP関連のパッケージをインストール
+      yum: name={{item}} state=latest
+      with_items:
+        - php
+        - php-devel
+        - php-mbstring
+        - php-mysql
+        - php-intl
+      notify:
+        - restart apache
+
+    - name: PHPのタイムゾーン設定
+      replace: >
+        dest=/etc/php.ini
+        regexp="^;date\.timezone ="
+        replace="date.timezone = Asia/Tokyo"
+
+    - name: htmlディレクトリのコピー #最終的にはgitから引っ張ってきたい
+      copy: src=html/ dest=/var/www/html/ owner=vagrant
+  
+  handlers:
+    - name: restart apache
+      service: name=httpd state=restarted
