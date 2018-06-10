@@ -33,7 +33,7 @@
 
 # Ansible
 
-playbook.retry
+*.retry
 
 
 # mac
