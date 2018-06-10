@@ -3,12 +3,6 @@
 class ZaimController extends AppController {
 	public $helpers = array('Html', 'Form');
 
-	// public $CONSUMER_KEY = 'b69a26665aacd6731e6a4051cb397e548fd1bce8';
-	// public $CONSUMER_SECRET = '88e1af266f5d6eb4b8e5ee41aa58d3c94587a12a';
-	// public $GET_REQUEST_TOKEN_URL = 'https://api.zaim.net/v2/auth/request';
-	// public $OATH_URL = 'https://auth.zaim.net/users/auth';
-	// public $GET_ACCESS_TOKEN_URL = 'https://api.zaim.net/v2/auth/access';
-    
     public function index() {
 
 		App::import('Vendor', 'Consumer', array('file' => 'HTTP/OAuth/Consumer.php'));
@@ -34,7 +28,7 @@ class ZaimController extends AppController {
 			session_start();
 		}
 
-		$content = '';
+		$request_message = $data_list = $error_message = '';
 		try {
 			// Initialize HTTP_OAuth_Consumer
 			$oauth = new HTTP_OAuth_Consumer($consumer_key, $consumer_secret);
@@ -72,10 +66,12 @@ class ZaimController extends AppController {
 				$oauth->setTokenSecret($_SESSION['oauth_token_secret']);
 				$result = $oauth->sendRequest($resource_url, array(), 'GET');
 			
-				$content = $result->getBody();
-			
+				$data_list = $result->getBody();
+				$this->set('data_list', $data_list);
+
 			// 1 Request
 			} else {
+				echo '3 Access';
 				// Get a Request Token
 				$oauth->getRequestToken($request_url, $callback_url);
 			
@@ -87,15 +83,16 @@ class ZaimController extends AppController {
 				// Get an Authorize URL
 				$authorize_url = $oauth->getAuthorizeURL($authorize_url);
 			
-				$content = "Click the link.<br />\n";
-				$content .= sprintf('<a href="%s">%s</a>', $authorize_url, $authorize_url);
+				$request_message = "Click the link.<br />\n";
+				$request_message .= sprintf('<a href="%s">%s</a>', $authorize_url, $authorize_url);
+				$this->set('request_message', $request_message);
 			}
 		
 		} catch (Exception $e) {
-			$content .= $e->getMessage();
+			$error_message .= $e->getMessage();
+			$this->set('error_message', $error_message);
 		}
-
-        $this->set('content', $content);
+		
         $this->set('title_for_layout', 'Zaim API 認証');
 	}
 	
