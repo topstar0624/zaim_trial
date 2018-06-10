@@ -1,21 +1,21 @@
-<? if(isset($request_message)): ?>
-    <h2>ようこそ</h2>
+<?php if(isset($request_message)): ?>
+    <h2>Zaimアカウントでログインしますか？</h2>
     <?=$request_message?>
-<? endif; ?>
+<?php endif; ?>
 
-<? if(isset($data_list)): ?>
+<?php if(isset($data_list)): ?>
     <h2>あなたのZaimデータです</h2>
-    <? $data_list = json_decode($data_list,true); ?>
+    <?php $data_list = json_decode($data_list,true); ?>
     <dl>
-        <? foreach ($data_list['me'] as $k => $v) : ?>
+        <?php foreach ($data_list['me'] as $k => $v) : ?>
             <dt><?=$k?></dt>
             <dd><?=$v?></dd>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </dl>
     <p><a href='?action=clear'>ログアウト</a></p>
-<? endif; ?>
+<?php endif; ?>
 
-<? if(isset($error_message)): ?>
-    <h2>エラーです</h2>
+<?php if(isset($error_message)): ?>
+    <h2>エラーメッセージ</h2>
     <?=$error_message?>
-<? endif; ?>
+<?php endif; ?>

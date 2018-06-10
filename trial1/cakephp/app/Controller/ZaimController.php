@@ -3,11 +3,14 @@
 class ZaimController extends AppController {
 	public $helpers = array('Html', 'Form');
 
-    public function index() {
-
+	function __construct($request, $response) {
+		parent::__construct($request, $response);
+		
 		App::import('Vendor', 'Consumer', array('file' => 'HTTP/OAuth/Consumer.php'));
-
 		session_start();
+	}
+
+    public function index() {
 
 		// Provider info
 		$provider_base = 'https://api.zaim.net/v2/auth/';
@@ -46,7 +49,6 @@ class ZaimController extends AppController {
 			// 2 Authorize
 			if ($_SESSION['type']=='authorize' &&
 				isset($_GET['oauth_token'], $_GET['oauth_verifier'])) {
-				echo '2 Authorize';
 				// Exchange the Request Token for an Access Token
 				$oauth->setToken($_SESSION['oauth_token']);
 				$oauth->setTokenSecret($_SESSION['oauth_token_secret']);
@@ -60,7 +62,6 @@ class ZaimController extends AppController {
 			
 			// 3 Access
 			if ($_SESSION['type']=='access') {
-				echo '3 Access';
 				// Accessing Protected Resources
 				$oauth->setToken($_SESSION['oauth_token']);
 				$oauth->setTokenSecret($_SESSION['oauth_token_secret']);
@@ -71,7 +72,6 @@ class ZaimController extends AppController {
 
 			// 1 Request
 			} else {
-				echo '3 Access';
 				// Get a Request Token
 				$oauth->getRequestToken($request_url, $callback_url);
 			
@@ -83,8 +83,7 @@ class ZaimController extends AppController {
 				// Get an Authorize URL
 				$authorize_url = $oauth->getAuthorizeURL($authorize_url);
 			
-				$request_message = "Click the link.<br />\n";
-				$request_message .= sprintf('<a href="%s">%s</a>', $authorize_url, $authorize_url);
+				$request_message = sprintf('<a href="%s">ログイン認証に進む</a>', $authorize_url);
 				$this->set('request_message', $request_message);
 			}
 		
@@ -93,7 +92,7 @@ class ZaimController extends AppController {
 			$this->set('error_message', $error_message);
 		}
 		
-        $this->set('title_for_layout', 'Zaim API 認証');
+        $this->set('title_for_layout', 'Zaim課題');
 	}
 	
 
