@@ -36,20 +36,29 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<body>
+<body id="body_<?=$this->action?>">
 	<div id="container">
-		<div id="header">
-			<h1><i class="fas fa-calculator"></i>&nbsp;<?php echo $this->Html->link('シンプル家計簿', '/'); ?></h1>
-		</div>
-		<div id="content">
 
+		<header id="header">
+			<h1><i class="fas fa-calculator"></i>&nbsp;<?php echo $this->Html->link('シンプル家計簿', '/'); ?></h1>
+			
+			<div id="header_button" class="actions">
+				<?php if(isset($authorize_url)) { ?>
+					<a href="<?=$authorize_url?>" title="ログイン">ログイン</a>
+				<?php } else { ?>
+					<a href="/logout" title="ログアウト">ログアウト</a>
+				<?php } ?>
+			</div>
+		</header>
+		
+		<main id="content">
 			<?php echo $this->Flash->render(); ?>
 			<?php echo $this->fetch('content'); ?>
-
-		</div>
-		<div id="footer">
+		</main>
+		
+		<footer id="footer">
 			&copy;2018 ほしさきひとみ
-		</div>
+		</footer>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 </body>
