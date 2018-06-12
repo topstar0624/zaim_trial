@@ -1,2 +1,2 @@
 [app]
-192.168.33.10 ansible_ssh_pass=vagrant ansible_ssh_user=vagrant
+192.168.33.10 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_become_pass=vagrant

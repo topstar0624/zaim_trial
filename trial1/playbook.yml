@@ -2,6 +2,7 @@
   become: yes
   tasks:
 
+    # Apache
     - name: Apacheをインストール
       yum: name=httpd state=latest
 
@@ -11,8 +12,15 @@
     - name: オーナーチェンジ
       file: dest=/var/www/html owner=vagrant recurse=yes
 
+    # PHP
+    - name: レミさんレポジトリインストール
+      yum: name={{item}} state=present
+      with_items:
+        - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        - http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+
     - name: PHP関連のパッケージをインストール
-      yum: name={{item}} state=latest
+      yum: name={{item}} state=present enablerepo=remi,remi-php56
       with_items:
         - php
         - php-devel
@@ -27,10 +35,22 @@
         dest=/etc/php.ini
         regexp="^;date\.timezone ="
         replace="date.timezone = Asia/Tokyo"
+    
+    # CakePHP
+    - name: rsyncをインストール
+      yum: name=rsync state=latest
 
-    - name: htmlディレクトリのコピー #最終的にはgitから引っ張ってきたい
-      copy: src=html/ dest=/var/www/html/ owner=vagrant
-  
+    - name: CakePHPディレクトリをコピー
+      synchronize: src=cakephp/ dest=/var/www/html/cakephp/ recursive=yes
+      
+    - name: ドキュメントルートを変更
+      file: path=/var/www/html/cakephp/app/webroot/ owner=vagrant group=vagrant recurse=yes
+
+    - name: パーミッションを変更
+      file: path=/var/www/html/cakephp/app/ state=directory recurse=yes owner=vagrant group=vagrant mode=0777
+      notify:
+        - restart apache
+
   handlers:
     - name: restart apache
       service: name=httpd state=restarted
