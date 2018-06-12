@@ -1,49 +1,243 @@
 @charset "utf-8";
 
-h1 {
-	font-size: 2.5em;
+/* ******************** 共通部分 ******************** */
+
+/* 基本 */
+* {
+	box-sizing: border-box;
+}
+div, header, main, footer {
+	overflow: hidden;
+	position: relative;
+}
+html {
+	font-size: 62.5%;
+}
+body {
+	font-size: 1.6rem;
+}
+h2 {
+	color: #333;
+	font-size: 5rem;
+	text-align: center;
+}
+
+/* header */
+#header {
+	padding: 20px;
 }
 #header h1 {
 	background: none;
 	float: left;
+	font-size: 4rem;
 	line-height: 1;
 	padding: 0;
 	margin: 0;
 }
-#header_button {
-	float: right;
-}
-#footer {
-	text-align: center;
-}
-#content{
-	padding: 40px;
-}
-#body_login #content {
-	text-align: center;
-}
-div.actions {
-	float: none;
-	width: auto;
-}
-
-#data_box > div {
-	display: inline-block;
+#header h1 i {
 	vertical-align: top;
 }
-#user_box {
-	text-align: center;
-	width: 20%;
+#header a:hover {
+	text-decoration: none !important;
 }
-#user_box img {
+
+/* nav */
+#nav {
+	float: right;
+	top: 5px;
+}
+#nav > * {
+	display: inline-block;
+    vertical-align: middle;
+}
+#nav img {
 	border-radius: 50%;
+	height: 40px;
+    width: 40px;
 }
-#form_box {
-	width: 40%;
+#nav div {
+	line-height: 1;
+	margin: 0 1rem;
 }
-#log_box {
-	width: 40%;
+#nav a {
+	color: #333;
+	line-height: 3rem;
 }
-#log_box dl {
+
+/* main */
+#main {
+	background: #fff;
+	color: #333;
+	padding: 40px;
+}
+
+/* footer */
+#footer {
+	padding: 20px;
+	text-align: center;
+}
+
+/* 使い回し */
+#flashMessage {
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+/* ******************** ログイン画面のみ ******************** */
+
+#body_login #main {
+	text-align: center;
+}
+#body_login #main .actions {
+	float: none; /* 打ち消し */
+	font-size: 2rem;
+	width: auto; /* 打ち消し */
+}
+
+/* ******************** 家計簿画面のみ ******************** */
+
+/* h2 */
+.circle_button {
+	position: relative;
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	margin: -10px 10px 0;
+	color: #FFF;
+	font-size: 2rem;
+	letter-spacing: -1px;
+	line-height: 80px;
+	background: #CCC;
+	border-radius: 50%;
+	text-decoration: none;
+	vertical-align: middle;
+}
+.circle_button:hover {
+	color: #fff;
+	background: #AAA;
+}
+
+/* table */
+table {
+	background: #FFF;
+}
+table th input[type="submit"] {
+	float: none;
+	margin: auto;
+}
+table th {
+	text-align: center;
+}
+table td {
+	white-space: nowrap;
+}
+table td:nth-of-type(1),
+table td:nth-of-type(2),
+table td:nth-of-type(3),
+table td:nth-of-type(4),
+table td:nth-of-type(6),
+table td:nth-of-type(7) {
+	text-align: center;
+}
+table td:nth-of-type(5) {
+	text-align: right;
+}
+table input[type=checkbox] {
+    clear: none; /* 打ち消し */
+    float: none; /* 打ち消し */
+    margin: 0; /* 打ち消し */
+	width: 20px;
+	height: 20px;
+}
+
+form {
+	background: #EEE;
+	border-radius: 10px;
+	display: block;
+	margin: 20px auto;
+	padding: 20px 20px 10px;
 	width: 100%;
+}
+
+/* create_form */
+#create_form {
+	overflow: hidden;
+	padding: 10px 20px;
+	text-align: right;
+}
+#create_form label {
+	display: block;
+	float: left;
+	font-size: 1em; /* 打ち消し */
+	margin: 10px 30px 10px 10px;
+	min-width: 200px;
+}
+#create_form .label_genre span {
+	vertical-align: 10px;
+}
+#create_form label input {
+	display: inline-block;
+	font-size: 1em;
+	padding: .5rem;
+	width: 200px;
+}
+#create_form label input[type="number"] {
+	padding: 9px;
+}
+#create_form label select {
+	height: 40px;
+}
+#create_form input[type="submit"] {
+	clear: none;
+	display: block;
+	float: right;
+	padding: 5px 20px;
+	margin: 10px;
+}
+
+/* checkbox */
+.checkbox_box {
+	padding: 0;
+	position: relative;
+	height: 34px;
+}
+input[type=checkbox] {
+	display: none;
+	margin: 0;
+}
+input[type=checkbox] + label {
+	cursor: pointer;
+	padding: 0;
+	width: 100%;
+	height: 40px;
+	margin-bottom: 0;
+}
+input[type=checkbox] + label::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: block;
+	width: 22px;
+	height: 22px;
+	margin: -14px 0 0 -11px;
+	background: #FFF;
+}
+input[type=checkbox] + label::before {
+	border: 2px solid #E0E0E0;
+}
+input[type=checkbox]:checked + label::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: block;
+	width: 15px;
+	height: 12px;
+	margin: -14px 0 0 -9px;
+	border-left: 5px solid #6CBEBE;
+	border-bottom: 5px solid #6CBEBE;
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }

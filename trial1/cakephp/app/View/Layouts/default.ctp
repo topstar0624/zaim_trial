@@ -15,7 +15,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title><?php echo $this->fetch('title'); ?></title>
@@ -40,18 +40,23 @@
 	<div id="container">
 
 		<header id="header">
-			<h1><i class="fas fa-calculator"></i>&nbsp;<?php echo $this->Html->link('シンプル家計簿', '/'); ?></h1>
-			
-			<div id="header_button" class="actions">
+			<h1>
+				<a href="/" title="シンプル家計簿">
+					<i class="fas fa-calculator"></i>&nbsp;シンプル家計簿
+				</a>
+			</h1>
+			<nav id="nav" class="actions">
 				<?php if(isset($authorize_url)) { ?>
 					<a href="<?=$authorize_url?>" title="ログイン">ログイン</a>
 				<?php } else { ?>
+					<img src="<?=$user['me']['profile_image_url']?>" alt="アイコン">
+        			<div>ようこそ！<br><?=$user['me']['name']?> さん</div>
 					<a href="/logout" title="ログアウト">ログアウト</a>
 				<?php } ?>
-			</div>
+			</nav>
 		</header>
 		
-		<main id="content">
+		<main id="main">
 			<?php echo $this->Flash->render(); ?>
 			<?php echo $this->fetch('content'); ?>
 		</main>
@@ -59,6 +64,7 @@
 		<footer id="footer">
 			&copy;2018 ほしさきひとみ
 		</footer>
+
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 </body>
