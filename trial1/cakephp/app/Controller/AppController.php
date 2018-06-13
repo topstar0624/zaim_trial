@@ -34,7 +34,7 @@ class AppController extends Controller {
 
     function __construct($request, $response) {
 		parent::__construct($request, $response);
-		
+
 		App::import('Vendor', 'Consumer', array('file' => 'HTTP/OAuth/Consumer.php'));
 
 		# 使用者情報
