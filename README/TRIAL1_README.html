@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <style>
+        h2 {
+            margin: 3em 1em 1em;
+        }
+
+        h3 {
+            margin: 3em 1.5em 1em;
+        }
+
+        hr {
+            margin-top: 50px;
+        }
+
+        pre {
+            font-size: 1.2em;
+        }
+
+        blockquote {
+            background: #666;
+            color: #FFF;
+            padding: 1em;
+        }
+
+        img {
+            display: block;
+            width: 90%;
+            margin: auto;
+        }
+
+        img+img {
+            margin-top: 20px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>TRIAL1</h1>
+
+    <hr>
+
+    <h2>開発内容</h2>
+    <pre>
+        Zaim API を使ったWebアプリケーション。
+    </pre>
+
+    <hr>
+
+    <h2>開発にかかった時間</h2>
+    <pre>
+        APIとプログラムを直接触るようになってからは15時間くらい？
+        その前にAnsibleやAWS、CakePHPについて学ぶ時間も別に作りました。
+        合計30時間くらいでしょうか。
+    </pre>
+
+    <hr>
+
+    <h2>工夫した点</h2>
+    <h3>1. actionを細かく分けたこと。</h3>
+    <pre>
+        シンプルな機能しかまだつけていませんが、
+        いくらでも機能を追加していけそうです。
+        拡張性を持たせるためにactionは極力小さくしました。
+    </pre>
+
+
+    <h3>2. Qiitaにまとめながら作業を進めたこと。</h3>
+    <pre>
+        プログラムと直接は関係ありませんが、
+        今回は一気に勉強することがたくさんあったので
+        あとで混乱したり忘れたりして困ることが予想できました。
+        Qiitaにメモを残しながら祖業を進めたので、
+        同じところにハマり続けることなく思考できました。
+    </pre>
+
+    <hr>
+
+    <h2>動作確認方法の説明書</h2>
+
+    <h3>お詫び</h3>
+    <pre>
+        ローカルでは動いているのですが、仮想サーバーやAWSにUPすると
+        タイムゾーンの設定がうまくいってないみたいで、ログイン認証から先に進めません。
+    </pre>
+    <img src="img/trial1_2.png">
+
+
+    <h3>AWS</h3>
+    <pre>
+        <a href="http://13.114.178.205/">http://13.114.178.205/</a>
+
+        こちらにアクセスするだけで動作確認できる…
+        予定だったのですが、申し訳ありません。
+    </pre>
+
+
+    <h3>仮想サーバー</h3>
+    <pre>
+        VirtualBox + Vagrant + Ansible で環境構築しました。
+        GitHubからソースをダウンロードしてくるかクローンをお願いします。
+
+        <a href="https://github.com/HitomiHoshisaki/zaim_trial">https://github.com/HitomiHoshisaki/zaim_trial</a>
+    </pre>
+
+    <blockquote>
+        <pre>
+    # バーチャルボックスのバージョンを調べる。 
+    $VBoxManage -v
+    
+    # バーチャルボックスがなければ、最新版(5.2)をダウンロード、インストール。
+    # 参考）https://www.virtualbox.org/
+    
+    # vagrant が入っているか確認。
+    $ vagrant --version
+    
+    # 入っていなければ、Vagrantの最新版(2.1.1)をダウンロード。 
+    # 参考）https://www.vagrantup.com/
+    
+    # ディレクトリに移動、仮想サーバー立ち上げ。
+    $ cd /path/to/trial1/
+    $ vagrant up
+
+    # ssh接続できるか確認。
+    $ vagrant ssh
+    exit
+    
+    # ansibleが入っているか確認。
+    $ ansible --version
+    
+    # ansibleが入っていなければ、pipをインストール。
+    $ sudo easy_install pip 
+
+    # pipでAnsible最新版(2.5.4)をインストール。
+    $ sudo pip install ansible
+
+    $ playbookを実行。パスワード聞かれたらvagrant(2回)。
+    $ ansible-playbook playbook.yml
+    </pre>
+    </blockquote>
+
+    <pre>
+        <a href="http://192.168.33.10/">http://192.168.33.10/</a>
+
+        こちらにアクセスすれば動作確認できる…
+        予定だったのですが、申し訳ありません。
+    </pre>
+
+    <hr>
+
+    <h2>スクショ</h2>
+    <img src="img/trial1_1.png">
+    <img src="img/trial1_2.png">
+    <img src="img/trial1_3.png">
+    <img src="img/trial1_4.png">
+    <img src="img/trial1_5.png">
+    <img src="img/trial1_6.png">
+</body>
+
+</HTML>

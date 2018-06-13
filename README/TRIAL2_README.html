@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <style>
+        h2,
+        h3 {
+            margin: 2em 1em 1em;
+        }
+
+        pre {
+            font-size: 1.2em;
+        }
+
+        blockquote {
+            background: #666;
+            color: #FFF;
+            padding: 1em;
+        }
+
+        img {
+            display: block;
+            width: 90%;
+            margin: auto;
+        }
+
+        img+img {
+            margin-top: 20px
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>TRIAL2</h1>
+
+    <hr>
+
+    <h2>開発内容</h2>
+    <pre>
+        Web版Zaimをスクレイピングして、家計簿の入力履歴を表示するコマンドラインツール。
+    </pre>
+
+    <hr>
+
+
+
+    <h2>開発にかかった時間</h2>
+    <pre>
+        2日間。約12時間。
+    </pre>
+
+    <hr>
+
+    <h2>工夫した点</h2>
+    <h3>1.対話型にしたこと。</h3>
+    <pre>
+        コマンドラインで実行すると、メールアドレス/パスワード/表示したい月を質問されます。
+        引数で渡すことも可能です。引数が足りない分は質問されます。
+        アイパスが間違っていると再入力を求められます。
+        ブラウザで実行することも可能にしました。
+        ブラウザの場合は自分自身のテスト用アカウントの当月分を表示します。
+    </pre>
+
+
+    <h3>2.できるだけ見やすくしたこと。</h3>
+    <pre>
+        コマンドラインの限られた画面表示の中で、一覧表にすると非常に見づらかったです。 
+        縦に項目を並べることで、ある程度文字数が長くなっても見やすさを担保できました。
+    </pre>
+
+    <hr>
+
+    <h2>動作確認方法の説明書</h2>
+    <h3>コマンドラインで対話型を利用する場合</h3>
+    <blockquote>
+        $ php /path/to/Log.php
+    </blockquote>
+    <img src="img/trial2_1.png">
+
+
+    <h3>コマンドラインで引数を渡す場合</h3>
+    <blockquote>
+        $ php /path/to/Log.php メールアドレス パスワード 表示したい月
+    </blockquote>
+    <pre>
+        コマンドの末尾に「メールアドレス パスワード 表示したい月」の順で引数を渡します。
+        全て半角英数、半角スペース区切り。月は201806のように記号なしの6ケタです。 
+        例） php /path/to/Log.php zaim.trial@gmail.com zaimtrial 201805
+    </pre>
+    <img src="img/trial2_2.png">
+    <img src="img/trial2_3.png">
+
+
+
+    <h3>ブラウザで実行する場合</h3>
+    <pre>
+        ブラウザで実行できる環境にファイルを置いて実行する。
+    </pre>
+
+</body>
+
+</HTML>
