@@ -1,9 +1,9 @@
 <h2>
-    <a href="/money/<?=$date_data['prev']?>" title="前月" class="circle_button"><前月</a>
+    <a href="/logs/<?=$date_data['prev']?>" title="前月" class="circle_button"><前月</a>
     <?=$date_data['target']?>
-    <a href="/money/<?=$date_data['next']?>" title="翌月" class="circle_button">翌月></a>
+    <a href="/logs/<?=$date_data['next']?>" title="翌月" class="circle_button">翌月></a>
 </h2>
-<form action="/money/delete" method="post" class="delete_form">
+<form action="/logs/delete" method="post" class="delete_form">
     <input type="hidden" name="target" value="<?=$date_data['target']?>">
     <table>
         <tr>
@@ -26,26 +26,26 @@
                 <td><?=$category_list[$l['category_id']]?></td>
                 <td><?=$l['genre_id'] ? $genre_list[$l['genre_id']] : ''?></td>
                 <td><?=$l['amount']?> 円</td>
-                <td><? if($l['mode']!=='income') echo '出金'; ?></td>
-                <td><? if($l['mode']!=='payment') echo '入金'; ?></td>
+                <td><?php if($l['mode']!=='income') echo '出金'; ?></td>
+                <td><?php if($l['mode']!=='payment') echo '入金'; ?></td>
                 <td><?=$l['place']?></td>
             </tr>
         <?php endforeach; ?>
     </table>
 </form>
 
-<form action="/money/create" method="post" id="create_form">
+<form action="/logs/create" method="post" id="create_form">
     <label>
         <span>日付</span>
         <input type="date" name="date" required="required">
     </label>
     <label>
         <span>金額</span>
-        <input type="number" name="amount" srequired="required">&nbsp;円
+        <input type="number" name="amount" required="required">&nbsp;円
     </label>
     <label class="label_genre">
         <span>カテゴリ＆ジャンル</span>
-        <select name="category__genre">
+        <select name="category__genre" required="required">
             <option selected> - 選択してください - </option>
             <?=$select_genre?>
         </select>

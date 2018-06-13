@@ -1,6 +1,6 @@
 <?php
 
-class OAuthController extends AppController {
+class OAuthsController extends AppController {
 
 	public $helpers = array('Html', 'Form');
 
@@ -101,7 +101,7 @@ class OAuthController extends AppController {
 	 * [step3]データにアクセス
 	 */
 	private function step3_access() {
-		header('Location: /money');
+		header('Location: /logs');
 		exit;
 	}
 
@@ -120,6 +120,7 @@ class OAuthController extends AppController {
 	public function logout() {
 		$_SESSION = array();
 		session_destroy();
+		session_start();
 		$this->Flash->set('ログアウトしました');
 		header('Location: /');
 		exit;

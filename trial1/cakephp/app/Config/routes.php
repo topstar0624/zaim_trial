@@ -25,17 +25,17 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'oauth', 'action' => 'login'));
+	Router::connect('/', array('controller' => 'o_auths', 'action' => 'login'));
 
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
-	Router::connect('/logout', array('controller' => 'oauth', 'action' => 'logout'));
-	Router::connect('/money/create', array('controller' => 'money', 'action' => 'create'));
-	Router::connect('/money/delete', array('controller' => 'money', 'action' => 'delete'));
+	Router::connect('/logout', array('controller' => 'o_auths', 'action' => 'logout'));
+	Router::connect('/logs/create', array('controller' => 'logs', 'action' => 'create'));
+	Router::connect('/logs/delete', array('controller' => 'logs', 'action' => 'delete'));
 	Router::connect(
-		'/money/:year/:month', 
-		array('controller' => 'money', 'action' => 'index'),
+		'/logs/:year/:month', 
+		array('controller' => 'logs', 'action' => 'index'),
 		array('year' => '[12][0-9]{3}','month' => '0[1-9]|1[012]')
 	);
 

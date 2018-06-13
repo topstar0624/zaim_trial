@@ -1,6 +1,6 @@
 <?php
 
-class MoneyController extends AppController {
+class LogsController extends AppController {
 
 	public $helpers = array('Html', 'Form');
 
@@ -145,7 +145,7 @@ class MoneyController extends AppController {
 			'date'			=> $_POST['date'],
 		), 'POST');
 		$this->Flash->set(date('Y/m/d', strtotime($_POST['date'])).' に '.$_POST['amount'].' 円の支出を登録しました');
-		header('Location: /money/'.date('Y/m', strtotime($_POST['date'])));
+		header('Location: /logs/'.date('Y/m', strtotime($_POST['date'])));
 		exit;
 	}
 
@@ -161,7 +161,7 @@ class MoneyController extends AppController {
 			), 'DELETE');
 		}
 		$this->Flash->set($_POST['target'].' の支出データを '.count($_POST['mode__id']).' 件削除しました');
-		header('Location: /money/'.$_POST['target']);
+		header('Location: /logs/'.$_POST['target']);
 		exit;
 	}
 }

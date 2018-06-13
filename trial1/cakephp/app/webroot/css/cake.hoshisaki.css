@@ -122,6 +122,7 @@ table {
 	background: #FFF;
 }
 table th input[type="submit"] {
+	cursor: pointer;
 	float: none;
 	margin: auto;
 }
@@ -188,6 +189,7 @@ form {
 	height: 40px;
 }
 #create_form input[type="submit"] {
+	cursor: pointer;
 	clear: none;
 	display: block;
 	float: right;
