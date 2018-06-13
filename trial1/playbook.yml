@@ -27,14 +27,14 @@
         - php-mbstring
         - php-mysql
         - php-intl
-      notify:
-        - restart apache
 
     - name: PHPのタイムゾーン設定
-      replace: >
+      replace:
         dest=/etc/php.ini
-        regexp="^;date\.timezone ="
+        regexp="^;date\.timezone =.*$"
         replace="date.timezone = Asia/Tokyo"
+      notify:
+        - restart apache
     
     # CakePHP
     - name: rsyncをインストール
@@ -43,11 +43,14 @@
     - name: CakePHPディレクトリをコピー
       synchronize: src=cakephp/ dest=/var/www/html/cakephp/ recursive=yes
       
-    - name: ドキュメントルートを変更
-      file: path=/var/www/html/cakephp/app/webroot/ owner=vagrant group=vagrant recurse=yes
-
     - name: パーミッションを変更
-      file: path=/var/www/html/cakephp/app/ state=directory recurse=yes owner=vagrant group=vagrant mode=0777
+      file: path=/var/www/html/cakephp/ state=directory recurse=yes owner=vagrant group=vagrant mode=0777
+
+    - name: ドキュメントルートを変更
+      replace:
+        dest=/etc/httpd/conf/httpd.conf
+        regexp="^DocumentRoot.*$"
+        replace="DocumentRoot /var/www/html/cakephp/app/webroot/"
       notify:
         - restart apache
 
